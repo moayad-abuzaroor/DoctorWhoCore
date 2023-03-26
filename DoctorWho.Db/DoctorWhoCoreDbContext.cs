@@ -21,8 +21,10 @@ namespace DoctorWho.Db {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            #region DoctorSeed
             modelBuilder.Entity<Doctor>().HasData(
-                new Doctor { 
+                new Doctor {
                     DoctorId = 1,
                     DoctorNumber = "1",
                     DoctorName = "William Hartnell",
@@ -62,6 +64,17 @@ namespace DoctorWho.Db {
                     FirstEpisodeDate = Convert.ToDateTime("2018 - 10 - 07"),
                 }
             );
+            #endregion
+
+            #region AuthorSeed
+            modelBuilder.Entity<Author>().HasData(
+                new Author { AuthorId = 1, AuthorName = "Anthony Coburn" },
+                new Author { AuthorId = 2, AuthorName = "Terry Nation" },
+                new Author { AuthorId = 3, AuthorName = "David Whitaker" },
+                new Author { AuthorId = 4, AuthorName = "John Lucarotti" },
+                new Author { AuthorId = 5, AuthorName = "Peter R. Newman" }
+            );
+            #endregion
         }
 
     }
