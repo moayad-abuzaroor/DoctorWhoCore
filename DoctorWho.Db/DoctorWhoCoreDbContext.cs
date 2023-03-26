@@ -75,6 +75,18 @@ namespace DoctorWho.Db {
                 new Author { AuthorId = 5, AuthorName = "Peter R. Newman" }
             );
             #endregion
+
+            #region CompanionSeed
+            modelBuilder.Entity<Companion>().HasData(
+                new Companion { CompanionId = 1, CompanionName = "Susan Foreman", WhoPlayed = "Carole Ann Ford" },
+                new Companion { CompanionId = 2, CompanionName = "Barbara Wright", WhoPlayed = "Jacqueline Hill" },
+                new Companion { CompanionId = 3, CompanionName = "Ian Chesterton", WhoPlayed = "William Russell" },
+                new Companion { CompanionId = 4, CompanionName = "Vicki", WhoPlayed = "Maureen O'Brien" },
+                new Companion { CompanionId = 5, CompanionName = "Steven Taylor", WhoPlayed = "Peter Purves" }
+            );
+            #endregion
+
+            
         }
 
     }
