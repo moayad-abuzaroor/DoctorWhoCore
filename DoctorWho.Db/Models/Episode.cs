@@ -18,7 +18,7 @@ namespace DoctorWho.Db.Models {
 
         [Column(TypeName = "varchar(100)")]
         public string Title { get; set; }
-        public DateOnly EpisodeDate { get; set; }
+        public DateTime EpisodeDate { get; set; }
         public Author Author { get; set; }
         public Doctor Doctor { get; set; }
         public string Notes { get; set; }

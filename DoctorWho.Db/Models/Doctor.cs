@@ -16,9 +16,9 @@ namespace DoctorWho.Db.Models {
 
         [Column(TypeName = "varchar(100)")]
         public string DoctorName { get; set; }
-        public DateOnly BirthDate { get; set; }
-        public DateOnly FirstEpisodeDate { get; set; }
-        public DateOnly LastEpisodeDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public DateTime FirstEpisodeDate { get; set; }
+        public DateTime LastEpisodeDate { get; set; }
 
     }
 }
