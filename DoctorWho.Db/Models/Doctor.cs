@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Models {
     public class Doctor {
+
+        [ForeignKey("Episode")]
         public int DoctorId { get; set; }
 
         [Column(TypeName = "varchar(10)")]
