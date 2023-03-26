@@ -126,7 +126,7 @@ namespace DoctorWho.Db {
             );
             #endregion
 
-            #region
+            #region EpisodeSeed
             modelBuilder.Entity<Episode>().HasData(
                 new Episode {
                     EpisodeId = 1,
@@ -183,6 +183,16 @@ namespace DoctorWho.Db {
                     DoctorId = 3,
                     Notes = ""
                 }
+            );
+            #endregion
+
+            #region EpisodeCompanionSeed
+            modelBuilder.Entity<EpisodeCompanion>().HasData(
+                new EpisodeCompanion { EpisodeCompanionId = 1, EpisodeId = 1, CompanionId = 1 },
+                new EpisodeCompanion { EpisodeCompanionId = 2, EpisodeId = 2, CompanionId = 1 },
+                new EpisodeCompanion { EpisodeCompanionId = 3, EpisodeId = 1, CompanionId = 2 },
+                new EpisodeCompanion { EpisodeCompanionId = 4, EpisodeId = 2, CompanionId = 2 },
+                new EpisodeCompanion { EpisodeCompanionId = 5, EpisodeId = 1, CompanionId = 3 }
             );
             #endregion
         }
