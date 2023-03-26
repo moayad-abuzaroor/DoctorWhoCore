@@ -126,7 +126,65 @@ namespace DoctorWho.Db {
             );
             #endregion
 
-
+            #region
+            modelBuilder.Entity<Episode>().HasData(
+                new Episode {
+                    EpisodeId = 1,
+                    SeriesNumber = 1,
+                    EpisodeNumber = 1,
+                    EpisodeType = "Classic",
+                    Title = "An Unearthly Child (An Unearthly Child - Part One)",
+                    EpisodeDate = Convert.ToDateTime("1963-11-23"),
+                    AuthorId = 1,
+                    DoctorId = 1,
+                    Notes = ""
+                },
+                new Episode {
+                    EpisodeId = 2,
+                    SeriesNumber = 1,
+                    EpisodeNumber = 2,
+                    EpisodeType = "Classic",
+                    Title = "The Cave of Skulls (An Unearthly Child - Part Two)",
+                    EpisodeDate = Convert.ToDateTime("1963-11-30"),
+                    AuthorId = 1,
+                    DoctorId = 1,
+                    Notes = ""
+                },
+                new Episode {
+                    EpisodeId = 3,
+                    SeriesNumber = 2,
+                    EpisodeNumber = 1,
+                    EpisodeType = "Revised",
+                    Title = "The Timeless Children",
+                    EpisodeDate = Convert.ToDateTime("2020-02-23"),
+                    AuthorId = 2,
+                    DoctorId = 2,
+                    Notes = ""
+                },
+                new Episode {
+                    EpisodeId = 4,
+                    SeriesNumber = 2,
+                    EpisodeNumber = 2,
+                    EpisodeType = "Revised",
+                    Title = "Ascension of the Cybermen",
+                    EpisodeDate = Convert.ToDateTime("2020-03-01"),
+                    AuthorId = 2,
+                    DoctorId = 2,
+                    Notes = ""
+                },
+                new Episode {
+                    EpisodeId = 5,
+                    SeriesNumber = 3,
+                    EpisodeNumber = 1,
+                    EpisodeType = "Special",
+                    Title = "Revolution of the Daleks",
+                    EpisodeDate = Convert.ToDateTime("2021-01-01"),
+                    AuthorId = 2,
+                    DoctorId = 3,
+                    Notes = ""
+                }
+            );
+            #endregion
         }
 
     }

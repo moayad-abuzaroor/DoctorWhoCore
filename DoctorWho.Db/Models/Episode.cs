@@ -19,7 +19,9 @@ namespace DoctorWho.Db.Models {
         [Column(TypeName = "varchar(100)")]
         public string Title { get; set; }
         public DateTime EpisodeDate { get; set; }
+        public int AuthorId { get; set; }
         public Author Author { get; set; }
+        public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
         public string Notes { get; set; }
     }
