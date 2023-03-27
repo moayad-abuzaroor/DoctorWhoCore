@@ -21,6 +21,9 @@ namespace DoctorWho.Db {
         public IQueryable<fnCompanionClass> fnCompanions(int episodeId)
         => FromExpression(() => fnCompanions(episodeId));
 
+        public IQueryable<fnEnemiesClass> fnEnemies(int episodeId)
+        => FromExpression(() => fnEnemies(episodeId));
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-MKSIC0H\\sqlexpress;Initial Catalog=DoctorWhoCore;Integrated Security=True; TrustServerCertificate=True");
         }
@@ -217,6 +220,14 @@ namespace DoctorWho.Db {
                 .HasName("fnCompanions");
 
             modelBuilder.Entity<fnCompanionClass>().HasNoKey();
+            #endregion
+
+            #region fnEnemies
+            modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
+                .GetMethod(nameof(fnEnemies)))
+                .HasName("fnEnemies");
+
+            modelBuilder.Entity<fnEnemiesClass>().HasNoKey();
             #endregion
         }
 
