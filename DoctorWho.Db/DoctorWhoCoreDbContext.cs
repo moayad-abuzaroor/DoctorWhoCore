@@ -1,5 +1,6 @@
 ﻿using DoctorWho.Db.Functions;
 using DoctorWho.Db.Models;
+using DoctorWho.Db.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace DoctorWho.Db {
         public DbSet<Episode> tblEpisode { get; set; }
         public DbSet<EpisodeCompanion> tblEpisodeCompanion { get; set; }
         public DbSet<EpisodeEnemy> tblEpisodeEnemy { get; set; }
+        public DbSet<viewEpisodes> viewEpisodes { get; set; }
 
 
         public IQueryable<fnCompanionClass> fnCompanions(int episodeId)
@@ -228,6 +230,13 @@ namespace DoctorWho.Db {
                 .HasName("fnEnemies");
 
             modelBuilder.Entity<fnEnemiesClass>().HasNoKey();
+            #endregion
+
+            #region viewEpisodes
+            modelBuilder
+            .Entity<viewEpisodes>()
+            .ToView(nameof(viewEpisodes))
+            .HasNoKey();
             #endregion
         }
 
