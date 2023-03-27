@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Functions;
+using DoctorWho.Db.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace DoctorWho.Db {
         public DbSet<Episode> tblEpisode { get; set; }
         public DbSet<EpisodeCompanion> tblEpisodeCompanion { get; set; }
         public DbSet<EpisodeEnemy> tblEpisodeEnemy { get; set; }
+
+
+        public IQueryable<fnCompanionClass> fnCompanions(int episodeId)
+        => FromExpression(() => fnCompanions(episodeId));
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-MKSIC0H\\sqlexpress;Initial Catalog=DoctorWhoCore;Integrated Security=True; TrustServerCertificate=True");
@@ -204,6 +209,14 @@ namespace DoctorWho.Db {
                 new EpisodeEnemy { EpisodeEnemyId = 4, EpisodeId = 4, EnemyId = 3 },
                 new EpisodeEnemy { EpisodeEnemyId = 5, EpisodeId = 5, EnemyId = 5 }
             );
+            #endregion
+
+            #region fnCompanions
+            modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
+                .GetMethod(nameof(fnCompanions)))
+                .HasName("fnCompanions");
+
+            modelBuilder.Entity<fnCompanionClass>().HasNoKey();
             #endregion
         }
 
