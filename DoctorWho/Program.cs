@@ -23,6 +23,7 @@ namespace DoctorWho
             //UpdateCompanion(6, "Moayad Abu Zaroor", "Ibrahim Shalhoub");
             //DeleteCompanion(6);
             //AddEnemy("Scoopy", "Test Description");
+            //UpdateEnemy(6, "Scoopy do", "Test Description");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -101,6 +102,19 @@ namespace DoctorWho
                 Description = description
             };
             context.Add(newEnemy); 
+            context.SaveChanges();
+            /*var query = from e in context.tblEnemy select e;
+            foreach (var e in query) {
+                Console.WriteLine(e.EnemyName);
+            }*/
+        }
+
+        private static void UpdateEnemy(int id, string enemyName, string description) {
+            var context = new DoctorWhoCoreDbContext();
+            Enemy updateEnemy;
+            updateEnemy = context.tblEnemy.Where(e => e.EnemyId == id).First();
+            updateEnemy.EnemyName = enemyName;
+            updateEnemy.Description = description; 
             context.SaveChanges();
             /*var query = from e in context.tblEnemy select e;
             foreach (var e in query) {
