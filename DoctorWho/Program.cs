@@ -21,6 +21,7 @@ namespace DoctorWho
             Console.WriteLine("----------------");
             //AddCompanion("Moayad", "Ibrahim");
             //UpdateCompanion(6, "Moayad Abu Zaroor", "Ibrahim Shalhoub");
+            //DeleteCompanion(6);
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -76,6 +77,18 @@ namespace DoctorWho
             context.SaveChanges();
             /*var query = from c in context.tblCompanion select c;
             foreach (var c in query) {
+                Console.WriteLine(c.CompanionName);
+            }*/
+        }
+
+        private static void DeleteCompanion(int id) {
+            var context = new DoctorWhoCoreDbContext();
+            Companion deleteCompanion;
+            deleteCompanion = context.tblCompanion.Where(c => c.CompanionId == id).First();
+            context.Remove(deleteCompanion);
+            context.SaveChanges();
+            /*var query = from c in context.tblCompanion select c;
+            foreach(var c in query) {
                 Console.WriteLine(c.CompanionName);
             }*/
         }
