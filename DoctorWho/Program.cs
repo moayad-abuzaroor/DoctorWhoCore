@@ -21,6 +21,7 @@ namespace DoctorWho
             //var viewEpisodes = viewEpisodesClass();
             Console.WriteLine("----------------");
             //AddEnemyToEpisode(4, 5);
+            //AddCompanionToEpisode(3, 4);
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -245,6 +246,16 @@ namespace DoctorWho
                 EpisodeId = episodeId
             };
             context.Add(episodeEnemy);
+            context.SaveChanges();
+        }
+
+        private static void AddCompanionToEpisode(int companionId, int episodeId) {
+            var context = new DoctorWhoCoreDbContext();
+            EpisodeCompanion episodeCompanion = new EpisodeCompanion() {
+                CompanionId = companionId,
+                EpisodeId = episodeId
+            };
+            context.Add(episodeCompanion);
             context.SaveChanges();
         }
     }
