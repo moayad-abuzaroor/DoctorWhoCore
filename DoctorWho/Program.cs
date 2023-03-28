@@ -20,6 +20,7 @@ namespace DoctorWho
             //var viewEpisodes = viewEpisodesClass();
             Console.WriteLine("----------------");
             //AddCompanion("Moayad", "Ibrahim");
+            //UpdateCompanion(6, "Moayad Abu Zaroor", "Ibrahim Shalhoub");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -60,10 +61,23 @@ namespace DoctorWho
             };
             context.Add(newCompanion);
             context.SaveChanges();
-            var query = from c in context.tblCompanion select c;
+            /*var query = from c in context.tblCompanion select c;
             foreach(var c in query) {
                 Console.WriteLine(c.CompanionName);
-            }
+            }*/
+        }
+
+        private static void UpdateCompanion(int id, string companionName, string whoPlayed) {
+            var context = new DoctorWhoCoreDbContext();
+            Companion updateCompanion;
+            updateCompanion = context.tblCompanion.Where(c => c.CompanionId == id).First();
+            updateCompanion.CompanionName = companionName;
+            updateCompanion.WhoPlayed = whoPlayed;
+            context.SaveChanges();
+            /*var query = from c in context.tblCompanion select c;
+            foreach (var c in query) {
+                Console.WriteLine(c.CompanionName);
+            }*/
         }
     }
 }
