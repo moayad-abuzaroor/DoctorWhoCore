@@ -29,7 +29,8 @@ namespace DoctorWho
             //  Convert.ToDateTime("2001-1-25"), Convert.ToDateTime("2001-1-25"));
             //UpdateDoctor(6, "0598378901", "Moayad Abu Zaroor", Convert.ToDateTime("2001-1-25"),
             //Convert.ToDateTime("2001-1-25"), Convert.ToDateTime("2001-1-25"));
-            DeleteDoctor(6);
+            //DeleteDoctor(6);
+            //AddAuthor("Moayad");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -175,6 +176,15 @@ namespace DoctorWho
             Doctor deleteDoctor;
             deleteDoctor = context.tblDoctor.Where(d => d.DoctorId == id).First();
             context.Remove(deleteDoctor);
+            context.SaveChanges();
+        }
+
+        private static void AddAuthor(string authorName) {
+            var context = new DoctorWhoCoreDbContext();
+            Author newAuthor = new Author() {
+                AuthorName = authorName
+            };
+            context.Add(newAuthor);
             context.SaveChanges();
         }
     }
