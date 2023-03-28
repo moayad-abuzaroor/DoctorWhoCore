@@ -17,7 +17,9 @@ namespace DoctorWho
             Console.WriteLine("----------------");
             var fnEnemies = enemiesFunctionClass();
             Console.WriteLine("----------------");
-            var viewEpisodes = viewEpisodesClass();
+            //var viewEpisodes = viewEpisodesClass();
+            Console.WriteLine("----------------");
+            //AddCompanion("Moayad", "Ibrahim");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -48,6 +50,20 @@ namespace DoctorWho
                     "\t" + v.DoctorName + "\t" + v.CompanionName + "\t" + v.EnemyName);
             }
             return query.ToList();
+        }
+
+        private static void AddCompanion(string companionName, string whoPlayed) {
+            var context = new DoctorWhoCoreDbContext();
+            Companion newCompanion = new Companion() {
+                CompanionName = companionName,
+                WhoPlayed = whoPlayed
+            };
+            context.Add(newCompanion);
+            context.SaveChanges();
+            var query = from c in context.tblCompanion select c;
+            foreach(var c in query) {
+                Console.WriteLine(c.CompanionName);
+            }
         }
     }
 }
