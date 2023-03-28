@@ -32,7 +32,8 @@ namespace DoctorWho
             //DeleteDoctor(6);
             //AddAuthor("Moayad");
             //UpdateAuthor(6, "Moayad Abu Zaroor");
-            DeleteAuthor(6);
+            //DeleteAuthor(6);
+            //AddEpisode(4, 1, "Classic", "bab 7ara", Convert.ToDateTime("2023-4-20"), 3, 4, "notes");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -203,6 +204,24 @@ namespace DoctorWho
             Author deleteAuthor;
             deleteAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
             context.Remove(deleteAuthor);
+            context.SaveChanges();
+        }
+
+        private static void AddEpisode(int seriesNumber, int episodeNumber, string episodeType,
+            string title, DateTime episodeDate, int authorId, int doctorId, string notes) 
+        {
+            var context = new DoctorWhoCoreDbContext();
+            Episode newEpisode = new Episode() {
+                SeriesNumber = seriesNumber,
+                EpisodeNumber = episodeNumber,
+                EpisodeType = episodeType,
+                Title = title,
+                EpisodeDate = episodeDate,
+                AuthorId = authorId,
+                DoctorId = doctorId,
+                Notes = notes
+            };
+            context.Add(newEpisode);
             context.SaveChanges();
         }
     }
