@@ -15,22 +15,14 @@ namespace DoctorWho
 {
     public class Program {
         static void Main(string[] args) {
-            //CompanionRepository companion = new CompanionRepository();
-            Console.WriteLine("----------------");
-            //var fnEnemies = enemiesFunctionClass();
+
+            AuthorRepository author = new AuthorRepository();
+            CompanionRepository companion = new CompanionRepository();
+            DoctorRepository doctor = new DoctorRepository();
+            EnemyRepository enemy = new EnemyRepository();
             Console.WriteLine("----------------");
             //var viewEpisodes = viewEpisodesClass();
-            Console.WriteLine("----------------");
-            //AuthorRepository author = new AuthorRepository();
-        }
-
-        private static List<fnEnemiesClass> enemiesFunctionClass() {
-            var context = new DoctorWhoCoreDbContext();
-            var query = from e in context.fnEnemies(1) select e;
-            foreach (var e in query) {
-                Console.WriteLine($"Enemy Name: {e.EnemyName}");
-            }
-            return query.ToList();
+            
         }
         
         private static List<viewEpisodes> viewEpisodesClass() {
@@ -42,84 +34,7 @@ namespace DoctorWho
                     "\t" + v.DoctorName + "\t" + v.CompanionName + "\t" + v.EnemyName);
             }
             return query.ToList();
-        }
-
-        private static void AddEnemy(string enemyName, string description) {
-            var context = new DoctorWhoCoreDbContext();
-            Enemy newEnemy = new Enemy() {
-                EnemyName = enemyName,
-                Description = description
-            };
-            context.Add(newEnemy); 
-            context.SaveChanges();
-            /*var query = from e in context.tblEnemy select e;
-            foreach (var e in query) {
-                Console.WriteLine(e.EnemyName);
-            }*/
-        }
-
-        private static void UpdateEnemy(int id, string enemyName, string description) {
-            var context = new DoctorWhoCoreDbContext();
-            Enemy updateEnemy;
-            updateEnemy = context.tblEnemy.Where(e => e.EnemyId == id).First();
-            updateEnemy.EnemyName = enemyName;
-            updateEnemy.Description = description; 
-            context.SaveChanges();
-            /*var query = from e in context.tblEnemy select e;
-            foreach (var e in query) {
-                Console.WriteLine(e.EnemyName);
-            }*/
-        }
-
-        private static void DeleteEnemy(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            Enemy deleteEnemy;
-            deleteEnemy = context.tblEnemy.Where(e => e.EnemyId == id).First();
-            context.Remove(deleteEnemy);
-            context.SaveChanges();
-            /*var query = from e in context.tblEnemy select e;
-            foreach(var e in query) {
-                Console.WriteLine(e.EnemyName);
-            }*/
-        }
-
-        private static void AddDoctor(string doctorNumber, string doctorName,
-            DateTime birthDate, DateTime firstEpisodeDate, DateTime lastEpisodeDate)
-        {
-            var context = new DoctorWhoCoreDbContext();
-            Doctor newDoctor = new Doctor() {
-                DoctorNumber = doctorNumber,
-                DoctorName = doctorName,
-                BirthDate = birthDate,
-                FirstEpisodeDate = firstEpisodeDate,
-                LastEpisodeDate = lastEpisodeDate
-            };
-            context.Add(newDoctor);
-            context.SaveChanges();
-        }
-
-        private static void UpdateDoctor(int id, string doctorNumber, string doctorName,
-            DateTime birthDate, DateTime firstEpisodeDate, DateTime lastEpisodeDate) 
-        {
-            var context = new DoctorWhoCoreDbContext();
-            Doctor updateDoctor;
-            updateDoctor = context.tblDoctor.Where(d => d.DoctorId == id).First();
-            updateDoctor.DoctorNumber = doctorNumber;
-            updateDoctor.DoctorName = doctorName;
-            updateDoctor.BirthDate = birthDate;
-            updateDoctor.FirstEpisodeDate = firstEpisodeDate;
-            updateDoctor.LastEpisodeDate = lastEpisodeDate;
-
-            context.SaveChanges();
-        }
-
-        private static void DeleteDoctor(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            Doctor deleteDoctor;
-            deleteDoctor = context.tblDoctor.Where(d => d.DoctorId == id).First();
-            context.Remove(deleteDoctor);
-            context.SaveChanges();
-        }        
+        }       
 
         private static void AddEpisode(int seriesNumber, int episodeNumber, string episodeType,
             string title, DateTime episodeDate, int authorId, int doctorId, string notes) 
@@ -183,21 +98,7 @@ namespace DoctorWho
             };
             context.Add(episodeCompanion);
             context.SaveChanges();
-        }
-
-        private static List<Doctor> GetAllDoctors() {
-            var context = new DoctorWhoCoreDbContext();
-            var query = from d in context.tblDoctor select d;
-            return query.ToList();
-        }
-
-        private static List<Enemy> GetEnemyById(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            var query = from e in context.tblEnemy
-                        where e.EnemyId == id
-                        select e;
-            return query.ToList();
-        }
+        }        
 
         
     }
