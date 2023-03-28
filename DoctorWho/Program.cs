@@ -32,6 +32,7 @@ namespace DoctorWho
             //DeleteDoctor(6);
             //AddAuthor("Moayad");
             //UpdateAuthor(6, "Moayad Abu Zaroor");
+            DeleteAuthor(6);
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -194,6 +195,14 @@ namespace DoctorWho
             Author updateAuthor;
             updateAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
             updateAuthor.AuthorName = authorName;
+            context.SaveChanges();
+        }
+
+        private static void DeleteAuthor(int id) {
+            var context = new DoctorWhoCoreDbContext();
+            Author deleteAuthor;
+            deleteAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
+            context.Remove(deleteAuthor);
             context.SaveChanges();
         }
     }
