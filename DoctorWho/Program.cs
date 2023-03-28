@@ -22,6 +22,7 @@ namespace DoctorWho
             Console.WriteLine("----------------");
             //AddEnemyToEpisode(4, 5);
             //AddCompanionToEpisode(3, 4);
+            //var getAllDoctors = GetAllDoctors();           
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -257,6 +258,12 @@ namespace DoctorWho
             };
             context.Add(episodeCompanion);
             context.SaveChanges();
+        }
+
+        private static List<Doctor> GetAllDoctors() {
+            var context = new DoctorWhoCoreDbContext();
+            var query = from d in context.tblDoctor select d;
+            return query.ToList();
         }
     }
 }
