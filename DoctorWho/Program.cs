@@ -24,6 +24,7 @@ namespace DoctorWho
             //DeleteCompanion(6);
             //AddEnemy("Scoopy", "Test Description");
             //UpdateEnemy(6, "Scoopy do", "Test Description");
+            //DeleteEnemy(6);
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -118,6 +119,18 @@ namespace DoctorWho
             context.SaveChanges();
             /*var query = from e in context.tblEnemy select e;
             foreach (var e in query) {
+                Console.WriteLine(e.EnemyName);
+            }*/
+        }
+
+        private static void DeleteEnemy(int id) {
+            var context = new DoctorWhoCoreDbContext();
+            Enemy deleteEnemy;
+            deleteEnemy = context.tblEnemy.Where(e => e.EnemyId == id).First();
+            context.Remove(deleteEnemy);
+            context.SaveChanges();
+            /*var query = from e in context.tblEnemy select e;
+            foreach(var e in query) {
                 Console.WriteLine(e.EnemyName);
             }*/
         }
