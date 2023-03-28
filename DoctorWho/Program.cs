@@ -20,23 +20,7 @@ namespace DoctorWho
             Console.WriteLine("----------------");
             //var viewEpisodes = viewEpisodesClass();
             Console.WriteLine("----------------");
-            //AddCompanion("Moayad", "Ibrahim");
-            //UpdateCompanion(6, "Moayad Abu Zaroor", "Ibrahim Shalhoub");
-            //DeleteCompanion(6);
-            //AddEnemy("Scoopy", "Test Description");
-            //UpdateEnemy(6, "Scoopy do", "Test Description");
-            //DeleteEnemy(6);
-            //AddDoctor("6", "Moayad", Convert.ToDateTime("2001-1-25"),
-            //  Convert.ToDateTime("2001-1-25"), Convert.ToDateTime("2001-1-25"));
-            //UpdateDoctor(6, "0598378901", "Moayad Abu Zaroor", Convert.ToDateTime("2001-1-25"),
-            //Convert.ToDateTime("2001-1-25"), Convert.ToDateTime("2001-1-25"));
-            //DeleteDoctor(6);
-            //AddAuthor("Moayad");
-            //UpdateAuthor(6, "Moayad Abu Zaroor");
-            //DeleteAuthor(6);
-            //AddEpisode(4, 1, "Classic", "bab 7ara", Convert.ToDateTime("2023-4-20"), 3, 4, "notes");
-            //UpdateEpisode(6, 13, 1, "Classic", "bab 7ara", Convert.ToDateTime("2023-3-23"), 3, 4, "notes 13");
-            //DeleteEpisode(6);
+            //AddEnemyToEpisode(4, 5);
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -251,6 +235,16 @@ namespace DoctorWho
             Episode deleteEpisode;
             deleteEpisode = context.tblEpisode.Where(e => e.EpisodeId == id).First();
             context.Remove(deleteEpisode);
+            context.SaveChanges();
+        }
+
+        private static void AddEnemyToEpisode(int enemyId, int episodeId) {
+            var context = new DoctorWhoCoreDbContext();
+            EpisodeEnemy episodeEnemy = new EpisodeEnemy() {
+                EnemyId = enemyId,
+                EpisodeId = episodeId
+            };
+            context.Add(episodeEnemy);
             context.SaveChanges();
         }
     }
