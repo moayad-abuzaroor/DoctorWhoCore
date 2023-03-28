@@ -22,6 +22,7 @@ namespace DoctorWho
             //AddCompanion("Moayad", "Ibrahim");
             //UpdateCompanion(6, "Moayad Abu Zaroor", "Ibrahim Shalhoub");
             //DeleteCompanion(6);
+            //AddEnemy("Scoopy", "Test Description");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -90,6 +91,20 @@ namespace DoctorWho
             /*var query = from c in context.tblCompanion select c;
             foreach(var c in query) {
                 Console.WriteLine(c.CompanionName);
+            }*/
+        }
+
+        private static void AddEnemy(string enemyName, string description) {
+            var context = new DoctorWhoCoreDbContext();
+            Enemy newEnemy = new Enemy() {
+                EnemyName = enemyName,
+                Description = description
+            };
+            context.Add(newEnemy); 
+            context.SaveChanges();
+            /*var query = from e in context.tblEnemy select e;
+            foreach (var e in query) {
+                Console.WriteLine(e.EnemyName);
             }*/
         }
     }
