@@ -15,25 +15,15 @@ namespace DoctorWho
 {
     public class Program {
         static void Main(string[] args) {
-            var fnCompanions = companionFunctionClass();
+            //CompanionRepository companion = new CompanionRepository();
             Console.WriteLine("----------------");
-            var fnEnemies = enemiesFunctionClass();
+            //var fnEnemies = enemiesFunctionClass();
             Console.WriteLine("----------------");
             //var viewEpisodes = viewEpisodesClass();
             Console.WriteLine("----------------");
             //AuthorRepository author = new AuthorRepository();
         }
 
-        private static List<fnCompanionClass> companionFunctionClass() {
-            int count = 1;
-            var context = new DoctorWhoCoreDbContext();
-            var query = from c in context.fnCompanions(1) select c;
-            foreach(var c in query) {
-                Console.WriteLine($"Companion {count} Name: {c.CompanionName}");
-                count++;
-            }
-            return query.ToList();
-        }
         private static List<fnEnemiesClass> enemiesFunctionClass() {
             var context = new DoctorWhoCoreDbContext();
             var query = from e in context.fnEnemies(1) select e;
@@ -52,45 +42,6 @@ namespace DoctorWho
                     "\t" + v.DoctorName + "\t" + v.CompanionName + "\t" + v.EnemyName);
             }
             return query.ToList();
-        }
-
-        private static void AddCompanion(string companionName, string whoPlayed) {
-            var context = new DoctorWhoCoreDbContext();
-            Companion newCompanion = new Companion() {
-                CompanionName = companionName,
-                WhoPlayed = whoPlayed
-            };
-            context.Add(newCompanion);
-            context.SaveChanges();
-            /*var query = from c in context.tblCompanion select c;
-            foreach(var c in query) {
-                Console.WriteLine(c.CompanionName);
-            }*/
-        }
-
-        private static void UpdateCompanion(int id, string companionName, string whoPlayed) {
-            var context = new DoctorWhoCoreDbContext();
-            Companion updateCompanion;
-            updateCompanion = context.tblCompanion.Where(c => c.CompanionId == id).First();
-            updateCompanion.CompanionName = companionName;
-            updateCompanion.WhoPlayed = whoPlayed;
-            context.SaveChanges();
-            /*var query = from c in context.tblCompanion select c;
-            foreach (var c in query) {
-                Console.WriteLine(c.CompanionName);
-            }*/
-        }
-
-        private static void DeleteCompanion(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            Companion deleteCompanion;
-            deleteCompanion = context.tblCompanion.Where(c => c.CompanionId == id).First();
-            context.Remove(deleteCompanion);
-            context.SaveChanges();
-            /*var query = from c in context.tblCompanion select c;
-            foreach(var c in query) {
-                Console.WriteLine(c.CompanionName);
-            }*/
         }
 
         private static void AddEnemy(string enemyName, string description) {
@@ -248,12 +199,6 @@ namespace DoctorWho
             return query.ToList();
         }
 
-        private static List<Companion> GetCompanionById(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            var query = from c in context.tblCompanion
-                        where c.CompanionId == id
-                        select c;
-            return query.ToList();
-        }
+        
     }
 }
