@@ -25,6 +25,8 @@ namespace DoctorWho
             //AddEnemy("Scoopy", "Test Description");
             //UpdateEnemy(6, "Scoopy do", "Test Description");
             //DeleteEnemy(6);
+            //AddDoctor("6", "Moayad", Convert.ToDateTime("2001-1-25"),
+              //  Convert.ToDateTime("2001-1-25"), Convert.ToDateTime("2001-1-25"));
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -133,6 +135,21 @@ namespace DoctorWho
             foreach(var e in query) {
                 Console.WriteLine(e.EnemyName);
             }*/
+        }
+
+        private static void AddDoctor(string doctorNumber, string doctorName,
+            DateTime birthDate, DateTime firstEpisodeDate, DateTime lastEpisodeDate)
+        {
+            var context = new DoctorWhoCoreDbContext();
+            Doctor newDoctor = new Doctor() {
+                DoctorNumber = doctorNumber,
+                DoctorName = doctorName,
+                BirthDate = birthDate,
+                FirstEpisodeDate = firstEpisodeDate,
+                LastEpisodeDate = lastEpisodeDate
+            };
+            context.Add(newDoctor);
+            context.SaveChanges();
         }
     }
 }
