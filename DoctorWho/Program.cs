@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity.Infrastructure;
 using DoctorWho.Db.Views;
+using static Azure.Core.HttpHeader;
 
 namespace DoctorWho
 {
@@ -34,6 +35,7 @@ namespace DoctorWho
             //UpdateAuthor(6, "Moayad Abu Zaroor");
             //DeleteAuthor(6);
             //AddEpisode(4, 1, "Classic", "bab 7ara", Convert.ToDateTime("2023-4-20"), 3, 4, "notes");
+            //UpdateEpisode(6, 13, 1, "Classic", "bab 7ara", Convert.ToDateTime("2023-3-23"), 3, 4, "notes 13");
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -222,6 +224,24 @@ namespace DoctorWho
                 Notes = notes
             };
             context.Add(newEpisode);
+            context.SaveChanges();
+        }
+
+        private static void UpdateEpisode(int id, int seriesNumber, int episodeNumber, string episodeType,
+            string title, DateTime episodeDate, int authorId, int doctorId, string notes) 
+        {
+            var context = new DoctorWhoCoreDbContext();
+            Episode updateEpisode;
+            updateEpisode = context.tblEpisode.Where(e => e.EpisodeId == id).First();
+            updateEpisode.SeriesNumber = seriesNumber;
+            updateEpisode.EpisodeNumber = episodeNumber;
+            updateEpisode.EpisodeType = episodeType;
+            updateEpisode.Title = title;
+            updateEpisode.EpisodeDate = episodeDate;
+            updateEpisode.AuthorId = authorId;
+            updateEpisode.DoctorId = doctorId;
+            updateEpisode.Notes = notes;
+
             context.SaveChanges();
         }
     }
