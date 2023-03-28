@@ -9,6 +9,7 @@ using System.Linq;
 using System.Data.Entity.Infrastructure;
 using DoctorWho.Db.Views;
 using static Azure.Core.HttpHeader;
+using DoctorWho.Db.Repositories;
 
 namespace DoctorWho
 {
@@ -20,11 +21,7 @@ namespace DoctorWho
             Console.WriteLine("----------------");
             //var viewEpisodes = viewEpisodesClass();
             Console.WriteLine("----------------");
-            //AddEnemyToEpisode(4, 5);
-            //AddCompanionToEpisode(3, 4);
-            //var getAllDoctors = GetAllDoctors();
-            //var getEnemyById = GetEnemyById(4);
-            //var getCompanionById = GetCompanionById(5);
+            //AuthorRepository author = new AuthorRepository();
         }
 
         private static List<fnCompanionClass> companionFunctionClass() {
@@ -171,32 +168,7 @@ namespace DoctorWho
             deleteDoctor = context.tblDoctor.Where(d => d.DoctorId == id).First();
             context.Remove(deleteDoctor);
             context.SaveChanges();
-        }
-
-        private static void AddAuthor(string authorName) {
-            var context = new DoctorWhoCoreDbContext();
-            Author newAuthor = new Author() {
-                AuthorName = authorName
-            };
-            context.Add(newAuthor);
-            context.SaveChanges();
-        }
-
-        private static void UpdateAuthor(int id, string authorName) {
-            var context = new DoctorWhoCoreDbContext();
-            Author updateAuthor;
-            updateAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
-            updateAuthor.AuthorName = authorName;
-            context.SaveChanges();
-        }
-
-        private static void DeleteAuthor(int id) {
-            var context = new DoctorWhoCoreDbContext();
-            Author deleteAuthor;
-            deleteAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
-            context.Remove(deleteAuthor);
-            context.SaveChanges();
-        }
+        }        
 
         private static void AddEpisode(int seriesNumber, int episodeNumber, string episodeType,
             string title, DateTime episodeDate, int authorId, int doctorId, string notes) 
