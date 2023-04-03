@@ -12,7 +12,7 @@ namespace DoctorWho.Db.Services
 {
     public class AuthorServices : IAuthorServices
     {
-        IGenericRepository<Author> repoAuthor = new GenericRepository<Author>();        
+        IGenericRepository<Author> repoAuthor = new Repositories.GenericRepository<Author>();        
 
         public IEnumerable<Author> GetAllAuthors()
         {

@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Functions;
+using DoctorWho.Db.IRepositories;
 using DoctorWho.Db.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories {
-    public class EnemyRepository {
+    public class EnemyRepository : IEnemyRepository
+    {
         public void AddEnemy(string enemyName, string description) {
             var context = new DoctorWhoCoreDbContext();
             Enemy newEnemy = new Enemy() {
