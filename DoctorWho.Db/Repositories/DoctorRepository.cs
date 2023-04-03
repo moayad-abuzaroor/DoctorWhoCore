@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.IRepositories;
+using DoctorWho.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories {
-    public class DoctorRepository {
+    public class DoctorRepository : IDoctorRepository
+    {
         public void AddDoctor(string doctorNumber, string doctorName,
             DateTime birthDate, DateTime firstEpisodeDate, DateTime lastEpisodeDate) {
             var context = new DoctorWhoCoreDbContext();

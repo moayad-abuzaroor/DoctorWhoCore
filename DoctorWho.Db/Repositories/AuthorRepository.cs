@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.IRepositories;
+using DoctorWho.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories {
-    public class AuthorRepository {
-        public void AddAuthor(string authorName) {
+    public class AuthorRepository : IAuthorRepository
+    {
+        public void AddAuthor(string authorName) 
+        {
             var context = new DoctorWhoCoreDbContext();
             Author newAuthor = new Author() {
                 AuthorName = authorName
@@ -16,7 +19,8 @@ namespace DoctorWho.Db.Repositories {
             context.SaveChanges();
         }
 
-        public void UpdateAuthor(int id, string authorName) {
+        public void UpdateAuthor(int id, string authorName)
+        {
             var context = new DoctorWhoCoreDbContext();
             Author updateAuthor;
             updateAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();
@@ -24,7 +28,8 @@ namespace DoctorWho.Db.Repositories {
             context.SaveChanges();
         }
 
-        public void DeleteAuthor(int id) {
+        public void DeleteAuthor(int id) 
+        {
             var context = new DoctorWhoCoreDbContext();
             Author deleteAuthor;
             deleteAuthor = context.tblAuthor.Where(a => a.AuthorId == id).First();

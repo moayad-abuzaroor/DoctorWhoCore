@@ -14,8 +14,8 @@ using DoctorWho.Db.Repositories;
 namespace DoctorWho
 {
     public class Program {
-        static void Main(string[] args) {
-
+        static void Main(string[] args)
+        {
             AuthorRepository author = new AuthorRepository();
             CompanionRepository companion = new CompanionRepository();
             DoctorRepository doctor = new DoctorRepository();

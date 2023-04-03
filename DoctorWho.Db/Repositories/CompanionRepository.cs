@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Functions;
+using DoctorWho.Db.IRepositories;
 using DoctorWho.Db.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories {
-    public class CompanionRepository {
+    public class CompanionRepository : ICompanionRepository
+    {
         public void AddCompanion(string companionName, string whoPlayed) {
             var context = new DoctorWhoCoreDbContext();
             Companion newCompanion = new Companion() {
@@ -47,7 +49,8 @@ namespace DoctorWho.Db.Repositories {
             }*/
         }
 
-        public List<Companion> GetCompanionById(int id) {
+        public List<Companion> GetCompanionById(int id)
+        {
             var context = new DoctorWhoCoreDbContext();
             var query = from c in context.tblCompanion
                         where c.CompanionId == id

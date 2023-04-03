@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.IRepositories;
+using DoctorWho.Db.Models;
 using DoctorWho.Db.Views;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories {
-    public class EpisodeRepository {
+    public class EpisodeRepository : IEpisodeRepository
+    {
         public List<viewEpisodes> viewEpisodesClass() {
             var context = new DoctorWhoCoreDbContext();
             var query = from v in context.viewEpisodes select v;

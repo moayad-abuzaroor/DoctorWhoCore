@@ -9,7 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorWho.Db {
-    public class DoctorWhoCoreDbContext : DbContext {
+    public class DoctorWhoCoreDbContext : DbContext 
+    {
         public DbSet<Author> tblAuthor { get; set; }
         public DbSet<Companion> tblCompanion { get; set; }
         public DbSet<Doctor> tblDoctor { get; set; }
