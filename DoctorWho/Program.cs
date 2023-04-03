@@ -11,6 +11,8 @@ using DoctorWho.Db.Views;
 using static Azure.Core.HttpHeader;
 using DoctorWho.Db.Repositories;
 using DoctorWho.Db.IRepositories;
+using DoctorWho.Db.IServices;
+using DoctorWho.Db.Services;
 
 namespace DoctorWho
 {
@@ -22,7 +24,7 @@ namespace DoctorWho
             DoctorRepository doctor = new DoctorRepository();
             EnemyRepository enemy = new EnemyRepository();
             EpisodeRepository episode = new EpisodeRepository();
-            Console.WriteLine("----------------");            
+            Console.WriteLine("----------------");
         }
                 
     }
