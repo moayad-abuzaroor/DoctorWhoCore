@@ -17,6 +17,6 @@ namespace DoctorWho.Db.IServices
         void InsertCompanion(Companion companion);
         void DeleteCompanion(int id);
         void UpdateCompanion(Companion companion);
-        List<fnCompanionClass> companionFunctionClass(int episodeId);
+        List<fnCompanionClass> GetCompanionsByEpisodeId(int episodeId);
     }
 }
