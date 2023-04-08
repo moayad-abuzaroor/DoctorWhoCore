@@ -26,6 +26,14 @@ namespace DoctorWho.Controllers
             var result = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorResource>>(authors);
             return result;
         }
+        
+        [HttpGet("{id}")]
+        public AuthorResource GetAuthorById(int id)
+        {
+            var author = _authorServices.GetAuthorById(id);
+            var result = _mapper.Map<Author, AuthorResource>(author);
+            return result;
+        }
 
         [HttpPost]
         public IActionResult AddAuthor([FromBody] AddAuthorResource resource)
