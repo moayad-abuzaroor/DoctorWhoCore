@@ -1,31 +1,55 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Functions;
-using DoctorWho.Db.Models;
-using Microsoft.Data.SqlClient;
+using DoctorWho.Db;
+using DoctorWho.Db.Domain.IRepositories;
+using DoctorWho.Db.Domain.IServices;
+using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Repositories;
+using DoctorWho.Db.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity.Infrastructure;
-using DoctorWho.Db.Views;
-using static Azure.Core.HttpHeader;
-using DoctorWho.Db.Repositories;
-using DoctorWho.Db.IRepositories;
-using DoctorWho.Db.IServices;
-using DoctorWho.Db.Services;
 
-namespace DoctorWho
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+/*builder.Services.AddDbContext<DoctorWhoCoreDbContext>(options =>
 {
-    public class Program {
-        static void Main(string[] args)
-        {
-            AuthorRepository author = new AuthorRepository();
-            CompanionRepository companion = new CompanionRepository();
-            DoctorRepository doctor = new DoctorRepository();
-            EnemyRepository enemy = new EnemyRepository();
-            EpisodeRepository episode = new EpisodeRepository();
-            Console.WriteLine("----------------");
-        }
-                
-    }
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});*/
+
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IAuthorServices, AuthorServices>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IDoctorServices, DoctorServices>();
+builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+var app = builder.Build();
+
+/*using (var scope = app.Services.CreateScope())
+using (var context = scope.ServiceProvider.GetService<DoctorWhoCoreDbContext>())
+{
+    context.Database.EnsureCreated();
+}*/
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
