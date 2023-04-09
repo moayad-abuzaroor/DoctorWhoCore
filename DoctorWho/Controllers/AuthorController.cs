@@ -20,7 +20,7 @@ namespace DoctorWho.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllAuthors")]
         public IEnumerable<AuthorResource> GetAuthors()
         {
             var authors = _authorServices.GetAllAuthors();
@@ -28,7 +28,7 @@ namespace DoctorWho.Controllers
             return result;
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("GetAuthorById")]
         public AuthorResource GetAuthorById(int id)
         {
             var author = _authorServices.GetAuthorById(id);
@@ -36,7 +36,7 @@ namespace DoctorWho.Controllers
             return result;
         }
 
-        [HttpPost]
+        [HttpPost("AddAuthor")]
         public IActionResult AddAuthor([FromBody] AddAuthorResource resource)
         {
             if(!ModelState.IsValid)
@@ -55,7 +55,7 @@ namespace DoctorWho.Controllers
             return Ok(authorResource);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateAuthor")]
         public IActionResult UpdateAuthor(int id, [FromBody] AddAuthorResource resource)
         {
             if(!ModelState.IsValid)
@@ -73,7 +73,7 @@ namespace DoctorWho.Controllers
             return Ok(authorResource);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteAuthor")]
         public IActionResult DeleteAuthor(int id)
         {
             var result = _authorServices.DeleteAuthor(id);
