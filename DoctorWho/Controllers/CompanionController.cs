@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Extensions;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,23 @@ namespace DoctorWho.Controllers
             var companion = _companionServices.GetCompanionById(id);
             var result = _mapper.Map<Companion, CompanionResource>(companion);
             return result;
+        }
+
+        [HttpPost("AddCompanion")]
+        public IActionResult AddCompanion([FromBody] AddCompanionResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var companion = _mapper.Map<AddCompanionResource, Companion>(resource);
+            var result = _companionServices.InsertCompanion(companion);
+
+            if(!result.Success)
+                return BadRequest(result.Message);
+
+            var companionResource = _mapper.Map<Companion, CompanionResource>(result.Companion);
+
+            return Ok(companionResource);
         }
     }
 }
