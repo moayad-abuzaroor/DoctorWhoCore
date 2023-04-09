@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Resources;
 
@@ -10,6 +11,7 @@ namespace DoctorWho.Mapping
         {
             CreateMap<Author, AuthorResource>();
             CreateMap<Companion, CompanionResource>();
+            CreateMap<fnCompanionClass, CompanionFunctionResource>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Extensions;
@@ -32,6 +33,14 @@ namespace DoctorWho.Controllers
         {
             var companion = _companionServices.GetCompanionById(id);
             var result = _mapper.Map<Companion, CompanionResource>(companion);
+            return result;
+        }
+
+        [HttpGet("GetCompanionByEpisodeId")]
+        public List<CompanionFunctionResource> GetCompanionByEpisodeId(int episodeId)
+        {
+            var companion = _companionServices.GetCompanionsByEpisodeId(episodeId);
+            var result = _mapper.Map<List<fnCompanionClass>, List<CompanionFunctionResource>>(companion);
             return result;
         }
 
