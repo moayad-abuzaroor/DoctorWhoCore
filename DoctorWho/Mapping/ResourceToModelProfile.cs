@@ -9,6 +9,7 @@ namespace DoctorWho.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<AddAuthorResource, Author>();
+            CreateMap<AddCompanionResource, Companion>();
         }
     }
 }

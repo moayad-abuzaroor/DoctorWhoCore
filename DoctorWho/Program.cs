@@ -22,6 +22,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorServices, AuthorServices>();
+builder.Services.AddScoped<ICompanionRepository, CompanionRepository>();
+builder.Services.AddScoped<ICompanionServices, CompanionServices>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDoctorServices, DoctorServices>();
 builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();

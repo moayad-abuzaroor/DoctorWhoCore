@@ -3,6 +3,7 @@ using DoctorWho.Db.Domain.IRepositories;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Persistence.Repositories;
+using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,24 @@ namespace DoctorWho.Db.Persistence.Services
             return repoCompanion2.companionFunctionClass(episodeId);
         }
 
-        public void DeleteCompanion(int id)
+        public CompanionResponse DeleteCompanion(int id)
         {
-            repoCompanion.Delete(id);
+            var existingCompanion = repoCompanion.GetById(id);
+            if (existingCompanion == null)
+                return new CompanionResponse("Companion not found");
+
+            try
+            {
+                repoCompanion.Delete(id);
+                repoCompanion.Save();
+
+                return new CompanionResponse(existingCompanion);
+            }
+            catch(Exception ex) 
+            {
+                return new CompanionResponse($"An error occurred when deleting companion: {ex.Message}");
+            }
+            
         }
 
         public IEnumerable<Companion> GetAllCompanions()
@@ -36,14 +52,41 @@ namespace DoctorWho.Db.Persistence.Services
             return repoCompanion.GetById(id);
         }
 
-        public void InsertCompanion(Companion companion)
+        public CompanionResponse InsertCompanion(Companion companion)
         {
-            repoCompanion.Insert(companion);
+            try
+            {
+                repoCompanion.Insert(companion);
+                repoCompanion.Save();
+
+                return new CompanionResponse(companion);
+            }
+            catch(Exception ex)
+            {
+                return new CompanionResponse($"An error occurred when adding companion: {ex.Message}");
+            }
         }
 
-        public void UpdateCompanion(Companion companion)
+        public CompanionResponse UpdateCompanion(int id, Companion companion)
         {
-            repoCompanion.Update(companion);
+            var existingCompanion = repoCompanion.GetById(id);
+            if (existingCompanion == null)
+                return new CompanionResponse("Companion not found");
+
+            existingCompanion.CompanionName = companion.CompanionName;
+            existingCompanion.WhoPlayed = companion.WhoPlayed;
+
+            try
+            {
+                repoCompanion.Update(companion);
+                repoCompanion.Save();
+
+                return new CompanionResponse(companion);
+            }
+            catch (Exception ex)
+            {
+                return new CompanionResponse($"An error occurred when updating companion: {ex.Message}");
+            }
         }
     }
 }

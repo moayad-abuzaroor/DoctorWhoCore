@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DoctorWho.Db.Persistence.Services.Communication;
 
 namespace DoctorWho.Db.Domain.IServices
 {
@@ -14,9 +15,9 @@ namespace DoctorWho.Db.Domain.IServices
     {
         IEnumerable<Companion> GetAllCompanions();
         Companion GetCompanionById(int id);
-        void InsertCompanion(Companion companion);
-        void DeleteCompanion(int id);
-        void UpdateCompanion(Companion companion);
+        CompanionResponse InsertCompanion(Companion companion);
+        CompanionResponse DeleteCompanion(int id);
+        CompanionResponse UpdateCompanion(int id, Companion companion);
         List<fnCompanionClass> GetCompanionsByEpisodeId(int episodeId);
     }
 }
