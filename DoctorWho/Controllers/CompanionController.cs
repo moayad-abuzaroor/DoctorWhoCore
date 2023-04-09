@@ -51,5 +51,24 @@ namespace DoctorWho.Controllers
 
             return Ok(companionResource);
         }
+
+        [HttpPut("UpdateCompanion")]
+        public IActionResult UpdateCompanion(int id, [FromBody] AddCompanionResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var companion = _mapper.Map<AddCompanionResource, Companion>(resource);
+            var result = _companionServices.UpdateCompanion(id, companion);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var companionResource = _mapper.Map<Companion, CompanionResource>(result.Companion);
+
+            return Ok(companionResource);
+        }
+
+        
     }
 }

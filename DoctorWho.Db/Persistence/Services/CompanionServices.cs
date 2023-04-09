@@ -78,7 +78,7 @@ namespace DoctorWho.Db.Persistence.Services
 
             try
             {
-                repoCompanion.Update(companion);
+                repoCompanion.Update(existingCompanion);
                 repoCompanion.Save();
 
                 return new CompanionResponse(companion);
