@@ -2,6 +2,7 @@
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Persistence.Repositories;
+using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,28 +25,62 @@ namespace DoctorWho.Db.Persistence.Services
             return repoAuthor.GetById(id);
         }
 
-        public void InsertAuthor(Author author)
+        public AuthorResponse InsertAuthor(Author author)
         {
-            repoAuthor.Insert(author);
-            repoAuthor.Save();
-        }
-
-        public void UpdateAuthor(int id, Author author)
-        {
-            var existingAuthor = repoAuthor.GetById(id);
-            if(existingAuthor != null)
+            try
             {
-                existingAuthor.AuthorName = author.AuthorName;
-                repoAuthor.Update(existingAuthor);
+                repoAuthor.Insert(author);
                 repoAuthor.Save();
+
+                return new AuthorResponse(author);
+            }
+            catch(Exception ex)
+            {
+                return new AuthorResponse($"An error occurred when adding new author: {ex.Message}");
             }
             
         }
 
-        public void DeleteAuthor(int id)
+        public AuthorResponse UpdateAuthor(int id, Author author)
         {
-            repoAuthor.Delete(id);
-            repoAuthor.Save();
+            var existingAuthor = repoAuthor.GetById(id);
+            if (existingAuthor == null)
+                return new AuthorResponse("Author not found");
+
+            existingAuthor.AuthorName = author.AuthorName;
+
+            try
+            {
+                repoAuthor.Update(existingAuthor);
+                repoAuthor.Save();
+
+                return new AuthorResponse(author);
+            }
+            catch( Exception ex )
+            {
+                return new AuthorResponse($"An error occurred when updating Author: {ex.Message}");
+            }
+            
+        }
+
+        public AuthorResponse DeleteAuthor(int id)
+        {
+            var existingAuthor = repoAuthor.GetById(id);
+            if (existingAuthor == null)
+                return new AuthorResponse("Author not found");
+
+            try
+            {
+                repoAuthor.Delete(id);
+                repoAuthor.Save();
+
+                return new AuthorResponse(existingAuthor);
+            }
+            catch(Exception ex)
+            {
+                return new AuthorResponse($"An error occurred when deleting Author: {ex.Message}");
+            }
+            
         }
     }
 }

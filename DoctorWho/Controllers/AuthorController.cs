@@ -4,6 +4,7 @@ using AutoMapper;
 using DoctorWho.Resources;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Domain.IServices;
+using DoctorWho.Extensions;
 
 namespace DoctorWho.Controllers
 {
@@ -40,38 +41,49 @@ namespace DoctorWho.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState.GetErrorMessages);
             }
 
             var author = _mapper.Map<AddAuthorResource, Author>(resource);
-            _authorServices.InsertAuthor(author);
+            var result = _authorServices.InsertAuthor(author);
 
+            if(!result.Success)
+                return BadRequest(result.Message);
 
-            return Ok(author);
+            var authorResource = _mapper.Map<Author, AuthorResource>(result.Author);
+
+            return Ok(authorResource);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult UpdateAuthor(int id, [FromBody] AddAuthorResource resource)
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState.GetErrorMessages);
             }
             var author = _mapper.Map<AddAuthorResource, Author>(resource);
-            _authorServices.UpdateAuthor(id, author);
+            var result = _authorServices.UpdateAuthor(id, author);
 
-            return Ok(author);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var authorResource = _mapper.Map<Author, AuthorResource>(result.Author);
+
+            return Ok(authorResource);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAuthor(int id)
         {
-            var deletedAuthor = _authorServices.GetAuthorById(id);
+            var result = _authorServices.DeleteAuthor(id);
 
-            if(deletedAuthor != null)
-                _authorServices.DeleteAuthor(id);
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-            return Ok(deletedAuthor);
+            var authorResource = _mapper.Map<Author, AuthorResource>(result.Author);
+
+            return Ok(authorResource);
         }
     }
 }
