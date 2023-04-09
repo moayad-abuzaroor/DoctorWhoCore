@@ -25,5 +25,13 @@ namespace DoctorWho.Controllers
             var result = _mapper.Map<IEnumerable<Companion>, IEnumerable<CompanionResource>>(companions);
             return result;
         }
+
+        [HttpGet("GetCompanionById")]
+        public CompanionResource GetCompanionById(int id)
+        {
+            var companion = _companionServices.GetCompanionById(id);
+            var result = _mapper.Map<Companion, CompanionResource>(companion);
+            return result;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace DoctorWho.Db.Persistence.Services.Communication
 {
     public class CompanionResponse : BaseResponse
     {        
-        Companion Companion { get; set; }
+        public Companion Companion { get; set; }
         public CompanionResponse(bool success, string message, Companion companion) : base(success, message)
         {
             Companion = companion;
