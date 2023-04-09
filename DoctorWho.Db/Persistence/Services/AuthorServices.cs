@@ -30,10 +30,16 @@ namespace DoctorWho.Db.Persistence.Services
             repoAuthor.Save();
         }
 
-        public void UpdateAuthor(Author author)
+        public void UpdateAuthor(int id, Author author)
         {
-            repoAuthor.Update(author);
-            repoAuthor.Save();
+            var existingAuthor = repoAuthor.GetById(id);
+            if(existingAuthor != null)
+            {
+                existingAuthor.AuthorName = author.AuthorName;
+                repoAuthor.Update(existingAuthor);
+                repoAuthor.Save();
+            }
+            
         }
 
         public void DeleteAuthor(int id)

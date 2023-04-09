@@ -13,6 +13,6 @@ namespace DoctorWho.Db.Domain.IServices
         Author GetAuthorById(int id);
         void InsertAuthor(Author author);
         void DeleteAuthor(int id);
-        void UpdateAuthor(Author author);
+        void UpdateAuthor(int id, Author author);
     }
 }

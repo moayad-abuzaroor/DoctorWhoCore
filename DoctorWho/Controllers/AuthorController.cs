@@ -49,5 +49,29 @@ namespace DoctorWho.Controllers
 
             return Ok(author);
         }
+
+        [HttpPut]
+        public IActionResult UpdateAuthor(int id, [FromBody] AddAuthorResource resource)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var author = _mapper.Map<AddAuthorResource, Author>(resource);
+            _authorServices.UpdateAuthor(id, author);
+
+            return Ok(author);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteAuthor(int id)
+        {
+            var deletedAuthor = _authorServices.GetAuthorById(id);
+
+            if(deletedAuthor != null)
+                _authorServices.DeleteAuthor(id);
+
+            return Ok(deletedAuthor);
+        }
     }
 }
