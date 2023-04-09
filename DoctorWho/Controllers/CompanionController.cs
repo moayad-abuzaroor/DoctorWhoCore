@@ -69,6 +69,17 @@ namespace DoctorWho.Controllers
             return Ok(companionResource);
         }
 
-        
+        [HttpDelete("DeleteCompanion")]
+        public IActionResult DeleteCompanion(int id)
+        {
+            var result = _companionServices.DeleteCompanion(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var companionResource = _mapper.Map<Companion, CompanionResource>(result.Companion);
+
+            return Ok(companionResource);
+        }
     }
 }
