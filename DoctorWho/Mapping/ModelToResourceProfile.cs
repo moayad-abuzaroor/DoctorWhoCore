@@ -12,6 +12,7 @@ namespace DoctorWho.Mapping
             CreateMap<Author, AuthorResource>();
             CreateMap<Companion, CompanionResource>();
             CreateMap<fnCompanionClass, CompanionFunctionResource>();
+            CreateMap<Doctor, DoctorResource>();
         }
     }
 }

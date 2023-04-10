@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace DoctorWho.Db.Domain.IServices
     {
         IEnumerable<Doctor> GetAllDoctors();
         Doctor GetDoctorById(int id);
-        void InsertDoctor(Doctor doctor);
-        void UpdateDoctor(Doctor doctor);
-        void DeleteDoctor(int id);
+        DoctorResponse InsertDoctor(Doctor doctor);
+        DoctorResponse UpdateDoctor(int id, Doctor doctor);
+        DoctorResponse DeleteDoctor(int id);
     }
 }
