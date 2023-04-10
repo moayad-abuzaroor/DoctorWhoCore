@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Services.Communication;
+using DoctorWho.Extensions;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,5 +26,15 @@ namespace DoctorWho.Controllers
             var result = _mapper.Map<IEnumerable<Doctor>, IEnumerable<DoctorResource>>(doctors);
             return result;
         }
+
+        [HttpGet("GetDoctorById")]
+        public DoctorResource GetDoctorById(int id)
+        {
+            var doctor = _doctorServices.GetDoctorById(id);
+            var result = _mapper.Map<Doctor, DoctorResource>(doctor);
+            return result;
+        }
+
+        
     }
 }
