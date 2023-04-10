@@ -7,8 +7,8 @@ namespace DoctorWho.Resources
     {
         public string DoctorNumber { get; set; }
         public string DoctorName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public DateTime FirstEpisodeDate { get; set; }
-        public DateTime LastEpisodeDate { get; set; }
+        public string BirthDate { get; set; }
+        public string FirstEpisodeDate { get; set; }
+        public string LastEpisodeDate { get; set; }
     }
 }

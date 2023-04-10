@@ -35,6 +35,21 @@ namespace DoctorWho.Controllers
             return result;
         }
 
-        
+        [HttpPost("AddDoctor")]
+        public IActionResult AddDoctor([FromBody] AddDoctorResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var doctor = _mapper.Map<AddDoctorResource, Doctor>(resource);
+            var result = _doctorServices.InsertDoctor(doctor);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var doctorResource = _mapper.Map<Doctor, DoctorResource>(result.Doctor);
+
+            return Ok(doctorResource);
+        }
     }
 }
