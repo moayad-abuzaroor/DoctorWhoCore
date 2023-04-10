@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Domain.IServices;
+using DoctorWho.Db.Domain.Models;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,12 @@ namespace DoctorWho.Controllers
             _mapper = mapper;
         }
 
-        
+        [HttpGet("GetAllDoctors")]
+        public IEnumerable<DoctorResource> GetDoctors()
+        {
+            var doctors = _doctorServices.GetAllDoctors();
+            var result = _mapper.Map<IEnumerable<Doctor>, IEnumerable<DoctorResource>>(doctors);
+            return result;
+        }
     }
 }
