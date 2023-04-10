@@ -68,5 +68,21 @@ namespace DoctorWho.Controllers
 
             return Ok(doctorResource);
         }
+
+        [HttpDelete("DeleteDoctor")]
+        public IActionResult DeleteDoctor(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var result = _doctorServices.DeleteDoctor(id);
+
+            if(!result.Success)
+                return BadRequest(result.Message);
+
+            var doctorResource = _mapper.Map<Doctor, DoctorResource>(result.Doctor);
+
+            return Ok(doctorResource);
+        }
     }
 }
