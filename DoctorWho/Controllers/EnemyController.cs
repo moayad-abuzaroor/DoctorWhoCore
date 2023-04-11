@@ -60,5 +60,22 @@ namespace DoctorWho.Controllers
 
             return Ok(enemyResource);
         }
+
+        [HttpPut("UpdateEnemy")]
+        public IActionResult UpdateEnemy(int id, [FromBody] AddEnemyResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var enemy = _mapper.Map<AddEnemyResource, Enemy>(resource);
+            var result = _enemyServices.UpdateEnemy(id, enemy);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var enemyResource = _mapper.Map<Enemy, EnemyResource>(result.Enemy);
+
+            return Ok(enemyResource);
+        }
     }
 }
