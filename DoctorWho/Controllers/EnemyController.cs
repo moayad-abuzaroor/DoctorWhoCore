@@ -77,5 +77,21 @@ namespace DoctorWho.Controllers
 
             return Ok(enemyResource);
         }
+
+        [HttpDelete("DeleteEnemy")]
+        public IActionResult DeleteEnemy(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var result = _enemyServices.DeleteEnemy(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var enemyResource = _mapper.Map<Enemy, EnemyResource>(result.Enemy);
+
+            return Ok(enemyResource);
+        }
     }
 }
