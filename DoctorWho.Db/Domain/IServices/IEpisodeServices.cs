@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace DoctorWho.Db.Domain.IServices
     {
         IEnumerable<Episode> GetAllEpisodes();
         Episode GetEpisodeById(int id);
-        void InsertEpisode(Episode episode);
-        void UpdateEpisode(Episode episode);
-        void DeleteEpisode(int id);
-        void AddEnemyToEpisode(int enemyId, int episodeId);
-        void AddCompanionToEpisode(int companionId, int episodeId);
+        EpisodeResponse InsertEpisode(Episode episode);
+        EpisodeResponse UpdateEpisode(int id, Episode episode);
+        EpisodeResponse DeleteEpisode(int id);
+        EpisodeResponse AddEnemyToEpisode(int enemyId, int episodeId);
+        EpisodeResponse AddCompanionToEpisode(int companionId, int episodeId);
     }
 }
