@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Domain.Views;
 using DoctorWho.Resources;
 
 namespace DoctorWho.Mapping
@@ -15,6 +16,8 @@ namespace DoctorWho.Mapping
             CreateMap<Doctor, DoctorResource>();
             CreateMap<Enemy, EnemyResource>();
             CreateMap<fnEnemiesClass, EnemyFunctionResource>();
+            CreateMap<Episode, EpisodeResource>();
+            CreateMap<viewEpisodes, ViewEpisodeResource>();
         }
     }
 }
