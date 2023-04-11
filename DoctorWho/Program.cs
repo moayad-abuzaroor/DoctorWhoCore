@@ -28,6 +28,8 @@ builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDoctorServices, DoctorServices>();
 builder.Services.AddScoped<IEnemyRepository, EnemyRepository>();
 builder.Services.AddScoped<IEnemyServices, EnemyServices>();
+builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
+builder.Services.AddScoped<IEpisodeServices, EpisodeServices>();
 builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
 
 builder.Services.AddAutoMapper(typeof(Program));
