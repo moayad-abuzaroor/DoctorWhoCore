@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Resources;
@@ -31,6 +32,14 @@ namespace DoctorWho.Controllers
         {
             var enemy = _enemyServices.GetEnemyById(id);
             var result = _mapper.Map<Enemy, EnemyResource>(enemy);
+            return result;
+        }
+
+        [HttpGet("GetEnemiesByEpisodeId")]
+        public List<EnemyFunctionResource> GetEnemiesByEpisodeId(int episodeId)
+        {
+            var enemies = _enemyServices.GetEnemiesByEpisodeId(episodeId);
+            var result = _mapper.Map<List<fnEnemiesClass>, List<EnemyFunctionResource>>(enemies);
             return result;
         }
     }
