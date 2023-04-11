@@ -91,5 +91,23 @@ namespace DoctorWho.Controllers
 
             return Ok(episodeResource);
         }
+
+        [HttpPut("UpdateEpisode")]
+        public IActionResult UpdateEpisode(int id, [FromBody] AddEpisodeResource resource)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var episode = _mapper.Map<AddEpisodeResource, Episode>(resource);
+            var result = _episodeServices.UpdateEpisode(id, episode);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var episodeResource = _mapper.Map<Episode, EpisodeResource>(result.Episode);
+
+            return Ok(episodeResource);
+
+        }
     }
 }
