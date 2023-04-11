@@ -2,6 +2,7 @@
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Domain.Views;
+using DoctorWho.Extensions;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,23 @@ namespace DoctorWho.Controllers
             var episodes = _episodeServices.viewEpisodes();
             var result = _mapper.Map<IEnumerable<viewEpisodes>, IEnumerable<ViewEpisodeResource>>(episodes);
             return result;
+        }
+
+        [HttpPost("AddEpisode")]
+        public IActionResult AddEpisode([FromBody] AddEpisodeResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var episode = _mapper.Map<AddEpisodeResource, Episode>(resource);
+            var result = _episodeServices.InsertEpisode(episode);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var episodeResource = _mapper.Map<Episode, EpisodeResource>(result.Episode);
+
+            return Ok(episodeResource);
         }
     }
 }
