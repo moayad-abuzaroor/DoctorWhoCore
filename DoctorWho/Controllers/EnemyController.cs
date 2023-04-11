@@ -25,5 +25,13 @@ namespace DoctorWho.Controllers
             var result = _mapper.Map<IEnumerable<Enemy>, IEnumerable<EnemyResource>>(enemies);
             return result;
         }
+
+        [HttpGet("GetEnemyById")]
+        public EnemyResource GetEnemyById(int id)
+        {
+            var enemy = _enemyServices.GetEnemyById(id);
+            var result = _mapper.Map<Enemy, EnemyResource>(enemy);
+            return result;
+        }
     }
 }
