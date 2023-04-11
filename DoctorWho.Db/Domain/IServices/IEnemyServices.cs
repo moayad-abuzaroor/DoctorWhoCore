@@ -1,5 +1,6 @@
 ﻿using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace DoctorWho.Db.Domain.IServices
     {
         IEnumerable<Enemy> GetAllEnemies();
         Enemy GetEnemyById(int id);
-        void InsertEnemy(Enemy enemy);
-        void UpdateEnemy(Enemy enemy);
-        void DeleteEnemy(int id);
+        EnemyResponse InsertEnemy(Enemy enemy);
+        EnemyResponse UpdateEnemy(int id, Enemy enemy);
+        EnemyResponse DeleteEnemy(int id);
         List<fnEnemiesClass> GetEnemiesByEpisodeId(int episodeId);
     }
 }
