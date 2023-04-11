@@ -26,6 +26,8 @@ builder.Services.AddScoped<ICompanionRepository, CompanionRepository>();
 builder.Services.AddScoped<ICompanionServices, CompanionServices>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDoctorServices, DoctorServices>();
+builder.Services.AddScoped<IEnemyRepository, EnemyRepository>();
+builder.Services.AddScoped<IEnemyServices, EnemyServices>();
 builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
 
 builder.Services.AddAutoMapper(typeof(Program));
