@@ -24,5 +24,13 @@ namespace DoctorWho.Controllers
             var result = _mapper.Map<IEnumerable<Episode>, IEnumerable<EpisodeResource>>(episodes);
             return result;
         }
+
+        [HttpGet("GetEpisodeById")]
+        public EpisodeResource GetEpisodeById(int id)
+        {
+            var episode = _episodeServices.GetEpisodeById(id);
+            var result = _mapper.Map<Episode, EpisodeResource>(episode);
+            return result;
+        }
     }
 }
