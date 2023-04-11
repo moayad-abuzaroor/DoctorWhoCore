@@ -75,5 +75,21 @@ namespace DoctorWho.Controllers
 
             return Ok(episodeResource);
         }
+
+        [HttpPost("AddCompanionToEpisode")]
+        public IActionResult AddCompanionToEpisode(int companionId, int episodeId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var result = _episodeServices.AddCompanionToEpisode(companionId, episodeId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var episodeResource = _mapper.Map<Episode, EpisodeResource>(result.Episode);
+
+            return Ok(episodeResource);
+        }
     }
 }
