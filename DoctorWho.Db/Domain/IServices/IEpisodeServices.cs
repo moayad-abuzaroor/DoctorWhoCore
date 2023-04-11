@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Domain.Views;
 using DoctorWho.Db.Persistence.Services.Communication;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DoctorWho.Db.Domain.IServices
     {
         IEnumerable<Episode> GetAllEpisodes();
         Episode GetEpisodeById(int id);
+        IEnumerable<viewEpisodes> viewEpisodes();
         EpisodeResponse InsertEpisode(Episode episode);
         EpisodeResponse UpdateEpisode(int id, Episode episode);
         EpisodeResponse DeleteEpisode(int id);

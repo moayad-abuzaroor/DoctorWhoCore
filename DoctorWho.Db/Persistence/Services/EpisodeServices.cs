@@ -1,6 +1,7 @@
 ﻿using DoctorWho.Db.Domain.IRepositories;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Domain.Views;
 using DoctorWho.Db.Persistence.Repositories;
 using DoctorWho.Db.Persistence.Services.Communication;
 using System;
@@ -127,6 +128,11 @@ namespace DoctorWho.Db.Persistence.Services
             {
                 return new EpisodeResponse($"An error occurred when updating Episode: {ex.Message}");
             }
+        }
+
+        public IEnumerable<viewEpisodes> viewEpisodes()
+        {
+            return repoEpisode2.viewEpisodesClass();
         }
     }
 }
