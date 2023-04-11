@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Domain.Views;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,14 @@ namespace DoctorWho.Controllers
         {
             var episode = _episodeServices.GetEpisodeById(id);
             var result = _mapper.Map<Episode, EpisodeResource>(episode);
+            return result;
+        }
+
+        [HttpGet("ViewEpisodes")]
+        public IEnumerable<ViewEpisodeResource> ViewEpisodes()
+        {
+            var episodes = _episodeServices.viewEpisodes();
+            var result = _mapper.Map<IEnumerable<viewEpisodes>, IEnumerable<ViewEpisodeResource>>(episodes);
             return result;
         }
     }
