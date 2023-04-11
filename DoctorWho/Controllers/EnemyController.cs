@@ -2,6 +2,7 @@
 using DoctorWho.Db.Domain.Functions;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Extensions;
 using DoctorWho.Resources;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +42,23 @@ namespace DoctorWho.Controllers
             var enemies = _enemyServices.GetEnemiesByEpisodeId(episodeId);
             var result = _mapper.Map<List<fnEnemiesClass>, List<EnemyFunctionResource>>(enemies);
             return result;
+        }
+
+        [HttpPost("AddEnemy")]
+        public IActionResult AddEnemy([FromBody] AddEnemyResource resource)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var enemy = _mapper.Map<AddEnemyResource, Enemy>(resource);
+            var result = _enemyServices.InsertEnemy(enemy);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var enemyResource = _mapper.Map<Enemy, EnemyResource>(result.Enemy);
+
+            return Ok(enemyResource);
         }
     }
 }
