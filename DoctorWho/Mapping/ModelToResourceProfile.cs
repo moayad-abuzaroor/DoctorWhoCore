@@ -13,6 +13,8 @@ namespace DoctorWho.Mapping
             CreateMap<Companion, CompanionResource>();
             CreateMap<fnCompanionClass, CompanionFunctionResource>();
             CreateMap<Doctor, DoctorResource>();
+            CreateMap<Enemy, EnemyResource>();
+            CreateMap<fnEnemiesClass, EnemyFunctionResource>();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace DoctorWho.Mapping
             CreateMap<AddAuthorResource, Author>();
             CreateMap<AddCompanionResource, Companion>();
             CreateMap<AddDoctorResource, Doctor>();
+            CreateMap<AddEnemyResource, Enemy>();
         }
     }
 }
