@@ -107,7 +107,22 @@ namespace DoctorWho.Controllers
             var episodeResource = _mapper.Map<Episode, EpisodeResource>(result.Episode);
 
             return Ok(episodeResource);
+        }
 
+        [HttpDelete("DeleteEpisode")]
+        public IActionResult DeleteEpisode(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages);
+
+            var result = _episodeServices.DeleteEpisode(id);
+
+            if(!result.Success)
+                return BadRequest(result.Message);
+
+            var episodeResource = _mapper.Map<Episode, EpisodeResource>(result.Episode);
+
+            return Ok(episodeResource);
         }
     }
 }
