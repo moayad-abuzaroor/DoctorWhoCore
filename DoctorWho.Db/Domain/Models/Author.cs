@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DoctorWho.Db.Domain.Models
 {
     public class Author
     {
-
+        [Key]
         [ForeignKey("Episode")]
         public int AuthorId { get; set; }
 

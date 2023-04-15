@@ -39,9 +39,9 @@ namespace DoctorWho.Controllers
         [HttpPost("AddAuthor")]
         public IActionResult AddAuthor([FromBody] AddAuthorResource resource)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState.GetErrorMessages);
+                return BadRequest(ModelState);
             }
 
             var author = _mapper.Map<AddAuthorResource, Author>(resource);
@@ -60,7 +60,7 @@ namespace DoctorWho.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState.GetErrorMessages);
+                return BadRequest(ModelState);
             }
             var author = _mapper.Map<AddAuthorResource, Author>(resource);
             var result = _authorServices.UpdateAuthor(id, author);

@@ -14,6 +14,11 @@ namespace DoctorWho.Db.Persistence.Services
     public class AuthorServices : IAuthorServices
     {
         IGenericRepository<Author> repoAuthor = new Repositories.GenericRepository<Author>();
+        private readonly IUnitOfWork _unitOfWork;
+        public AuthorServices(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public IEnumerable<Author> GetAllAuthors()
         {
