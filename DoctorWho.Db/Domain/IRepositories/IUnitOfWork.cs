@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoctorWho.Db.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace DoctorWho.Db.Domain.IRepositories
 {
     public interface IUnitOfWork
     {
-        Task Complete();
+        IGenericRepository<Companion> CompanionRepository { get; }
+        ICompanionRepository CompanionRepository2 { get; }
+        void Complete();
     }
 }

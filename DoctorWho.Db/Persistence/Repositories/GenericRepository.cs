@@ -47,9 +47,9 @@ namespace DoctorWho.Db.Persistence.Repositories
 
         public void Update(T obj)
         {
-            _dbContext.Update(obj);
-            //table.Attach(obj);
-            //_dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            //_dbContext.Update(obj);
+            table.Attach(obj);
+            _dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
         public void Save()

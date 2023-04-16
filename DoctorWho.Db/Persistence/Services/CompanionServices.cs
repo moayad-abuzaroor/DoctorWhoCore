@@ -14,24 +14,30 @@ namespace DoctorWho.Db.Persistence.Services
 {
     public class CompanionServices : ICompanionServices
     {
-        IGenericRepository<Companion> repoCompanion = new GenericRepository<Companion>();
-        ICompanionRepository repoCompanion2 = new CompanionRepository();
+        //IGenericRepository<Companion> repoCompanion = new GenericRepository<Companion>();
+        //ICompanionRepository repoCompanion2 = new CompanionRepository();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CompanionServices(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public List<fnCompanionClass> GetCompanionsByEpisodeId(int episodeId)
-        {
-            return repoCompanion2.companionFunctionClass(episodeId);
+        {            
+            return _unitOfWork.CompanionRepository2.companionFunctionClass(episodeId);
         }
 
         public CompanionResponse DeleteCompanion(int id)
         {
-            var existingCompanion = repoCompanion.GetById(id);
+            var existingCompanion = _unitOfWork.CompanionRepository.GetById(id);
             if (existingCompanion == null)
                 return new CompanionResponse("Companion not found");
 
             try
             {
-                repoCompanion.Delete(id);
-                repoCompanion.Save();
+                _unitOfWork.CompanionRepository.Delete(id);
+                _unitOfWork.Complete();
 
                 return new CompanionResponse(existingCompanion);
             }
@@ -44,20 +50,20 @@ namespace DoctorWho.Db.Persistence.Services
 
         public IEnumerable<Companion> GetAllCompanions()
         {
-            return repoCompanion.GetAll();
+            return _unitOfWork.CompanionRepository.GetAll();
         }
 
         public Companion GetCompanionById(int id)
         {
-            return repoCompanion.GetById(id);
+            return _unitOfWork.CompanionRepository.GetById(id);
         }
 
         public CompanionResponse InsertCompanion(Companion companion)
         {
             try
             {
-                repoCompanion.Insert(companion);
-                repoCompanion.Save();
+                _unitOfWork.CompanionRepository.Insert(companion);
+                _unitOfWork.Complete();
 
                 return new CompanionResponse(companion);
             }
@@ -69,7 +75,7 @@ namespace DoctorWho.Db.Persistence.Services
 
         public CompanionResponse UpdateCompanion(int id, Companion companion)
         {
-            var existingCompanion = repoCompanion.GetById(id);
+            var existingCompanion = _unitOfWork.CompanionRepository.GetById(id);
             if (existingCompanion == null)
                 return new CompanionResponse("Companion not found");
 
@@ -78,8 +84,8 @@ namespace DoctorWho.Db.Persistence.Services
 
             try
             {
-                repoCompanion.Update(existingCompanion);
-                repoCompanion.Save();
+                _unitOfWork.CompanionRepository.Update(existingCompanion);
+                _unitOfWork.Complete();
 
                 return new CompanionResponse(companion);
             }

@@ -2,6 +2,7 @@ using DoctorWho.Db;
 using DoctorWho.Db.Domain.IRepositories;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
+using DoctorWho.Db.Persistence.Context;
 using DoctorWho.Db.Persistence.Repositories;
 using DoctorWho.Db.Persistence.Services;
 using FluentValidation.AspNetCore;
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen();
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });*/
 
+builder.Services.AddScoped<DbContext, DoctorWhoCoreDbContext>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorServices, AuthorServices>();
 builder.Services.AddScoped<ICompanionRepository, CompanionRepository>();
@@ -32,6 +34,7 @@ builder.Services.AddScoped<IEnemyServices, EnemyServices>();
 builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 builder.Services.AddScoped<IEpisodeServices, EpisodeServices>();
 builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddFluentValidation(x =>

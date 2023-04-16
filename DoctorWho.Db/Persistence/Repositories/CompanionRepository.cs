@@ -12,6 +12,15 @@ namespace DoctorWho.Db.Persistence.Repositories
 {
     public class CompanionRepository : ICompanionRepository
     {
+        private readonly DoctorWhoCoreDbContext _dbContext;
+        public CompanionRepository()
+        {
+            _dbContext = new DoctorWhoCoreDbContext();
+        }
+        public CompanionRepository(DoctorWhoCoreDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void AddCompanion(string companionName, string whoPlayed)
         {
             var context = new DoctorWhoCoreDbContext();
