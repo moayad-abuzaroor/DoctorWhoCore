@@ -13,16 +13,19 @@ namespace DoctorWho.Controllers
     {
         private readonly IAuthorServices _authorServices;
         private readonly IMapper _mapper;
+        private readonly ILogger<AuthorController> _logger;
 
-        public AuthorController(IAuthorServices authorServices, IMapper mapper)
+        public AuthorController(IAuthorServices authorServices, IMapper mapper, ILogger<AuthorController> logger)
         {
             _authorServices = authorServices;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet("GetAllAuthors")]
         public IEnumerable<AuthorResource> GetAuthors()
         {
+            _logger.LogInformation("This is GetAuthors Controller");
             var authors = _authorServices.GetAllAuthors();
             var result = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorResource>>(authors);
             return result;
