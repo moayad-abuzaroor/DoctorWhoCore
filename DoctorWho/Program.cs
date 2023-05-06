@@ -40,6 +40,7 @@ builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddFluentValidation(x =>
 {
     x.RegisterValidatorsFromAssembly(typeof(Program).Assembly);
