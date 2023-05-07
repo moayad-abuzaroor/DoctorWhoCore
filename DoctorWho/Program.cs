@@ -5,7 +5,11 @@ using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Persistence.Context;
 using DoctorWho.Db.Persistence.Repositories;
 using DoctorWho.Db.Persistence.Services;
+using DoctorWho.Resources;
+using DoctorWho.Validations;
+using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -39,12 +43,14 @@ builder.Services.AddScoped<IEpisodeServices, EpisodeServices>();
 builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddFluentValidation(x =>
+builder.Services.AddValidatorsFromAssemblyContaining<AuthorValidator>();
+/*builder.Services.AddFluentValidation(x =>
 {
     x.RegisterValidatorsFromAssembly(typeof(Program).Assembly);
-});
+});*/
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

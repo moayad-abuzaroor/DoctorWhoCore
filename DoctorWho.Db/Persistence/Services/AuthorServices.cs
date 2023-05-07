@@ -3,6 +3,7 @@ using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Persistence.Repositories;
 using DoctorWho.Db.Persistence.Services.Communication;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace DoctorWho.Db.Persistence.Services
     public class AuthorServices : IAuthorServices
     {
         IGenericRepository<Author> repoAuthor = new Repositories.GenericRepository<Author>();
-
+        private readonly IValidator<Author> _validator;
+        public AuthorServices(IValidator<Author> validator)
+        {
+            _validator = validator;
+        }
         public IEnumerable<Author> GetAllAuthors()
         {
             return repoAuthor.GetAll();
@@ -27,6 +32,8 @@ namespace DoctorWho.Db.Persistence.Services
 
         public AuthorResponse InsertAuthor(Author author)
         {
+            var validationResult = _validator.Validate(author);
+            
             try
             {
                 repoAuthor.Insert(author);

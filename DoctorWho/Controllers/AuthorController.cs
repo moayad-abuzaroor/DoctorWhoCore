@@ -5,6 +5,7 @@ using DoctorWho.Resources;
 using DoctorWho.Db.Domain.Models;
 using DoctorWho.Db.Domain.IServices;
 using DoctorWho.Extensions;
+using FluentValidation;
 
 namespace DoctorWho.Controllers
 {
@@ -14,12 +15,14 @@ namespace DoctorWho.Controllers
         private readonly IAuthorServices _authorServices;
         private readonly IMapper _mapper;
         private readonly ILogger<AuthorController> _logger;
+        private readonly IValidator<Author> _validator;
 
-        public AuthorController(IAuthorServices authorServices, IMapper mapper, ILogger<AuthorController> logger)
+        public AuthorController(IAuthorServices authorServices, IMapper mapper, ILogger<AuthorController> logger, IValidator<Author> validator)
         {
             _authorServices = authorServices;
             _mapper = mapper;
             _logger = logger;
+            _validator = validator;
         }
 
         [HttpGet("GetAllAuthors")]
@@ -42,16 +45,22 @@ namespace DoctorWho.Controllers
         [HttpPost("AddAuthor")]
         public IActionResult AddAuthor([FromBody] AddAuthorResource resource)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             var author = _mapper.Map<AddAuthorResource, Author>(resource);
+            var resultt = _validator.Validate(author);
+            if (!resultt.IsValid)
+            {
+                return BadRequest(resultt.Errors);
+            }
             var result = _authorServices.InsertAuthor(author);
 
-            if(!result.Success)
-                return BadRequest(result.Message);
+            /*if(!result.Success)
+                return BadRequest(result.Message);*/
 
             var authorResource = _mapper.Map<Author, AuthorResource>(result.Author);
 

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DoctorWho.Validations
 {
-    public class AuthorValidator : AbstractValidator<AddAuthorResource>
+    public class AuthorValidator : AbstractValidator<Author>
     {
         public AuthorValidator() 
         {
